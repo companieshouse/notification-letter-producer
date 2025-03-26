@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC
+  "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<!-- Auditing configuration -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <!-- Console appender -->
+  <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p - [Class=%c] %m%n%X{CurrentUser} %d{ISO8601} "/>
+    </layout>
+  </appender>
+  
+  <appender name="CFFAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="CFF.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %C{1}%n%m%n%n"/>
+    </layout>
+  </appender>
+  
+  <appender name="MainMenuAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="MainMenu.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %C{1}%n%m%n%n"/>
+    </layout>
+  </appender>
+  
+  <appender name="HibernateAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="Hibernate.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %C{1}%n%m%n%n"/>
+    </layout>
+  </appender>
+  
+  <!-- System log file appender -->
+  <!-- TODO - filepath, rolling config -->
+  <appender name="LogFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="TechDRF.log"/>
+    <param name="DatePattern" value=".yyyy-MM-dd"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p - [Class=%c] %m%X{CurrentUser} %d{ISO8601}%n "/>
+    </layout>
+  </appender>
+
+  <appender name="EFFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="ef.log"/>
+    <param name="DatePattern" value=".yyyy-MM-dd"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %-5p [%X{Document}] - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="PerfFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="perf.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %X{CurrentUser} %-5p %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="BMFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="batchManager.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %X{CurrentUser} %-5p %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="ImageRenderAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="imageRenderer.log"/>
+    <param name="DatePattern" value=".yyyy-MM-dd"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %-5p [%X{Document}] - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="TuxFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="tux.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %X{CurrentUser} %-5p %m%n"/>
+    </layout>
+  </appender>
+
+  <logger name="com.sun.faces" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="javax.faces" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="org.hibernate">
+    <level value="WARN"/>
+    <appender-ref ref="HibernateAppender"/>
+  </logger>
+
+  <logger name="org.hibernate.hql.ast.AST" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="HibernateAppender"/>
+  </logger>
+
+<logger name="org.hibernate.SQL" additivity="false">
+  <level value="WARN" />
+    <appender-ref ref="HibernateAppender"/>
+</logger>
+
+<logger name="org.hibernate.engine.Cascade" additivity="false">
+  <level value="WARN" />
+    <appender-ref ref="HibernateAppender"/>
+</logger>
+
+<logger name="org.hibernate.type" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="HibernateAppender"/>
+  </logger>
+
+  <logger name="org.apache.commons" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="org.springframework" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+
+  <logger name="uk.gov.ch.chips" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="uk.gov.ch.cap" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="uk.gov.ch.chips.client.faces" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CFFAppender"/>
+  </logger>
+
+  <logger name="uk.gov.ch.chips.client.mainmenu" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="MainMenuAppender"/>
+  </logger>
+
+  <logger name="uk.gov.ch.chips.common.util.AopTimer" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="PerfFileAppender"/>
+  </logger>
+
+  <logger name="org.springmodules" additivity="false">
+    <level value="WARN"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+  
+  <logger name="performanceLogger" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="PerfFileAppender"/>
+  </logger>
+
+  <logger name="electronic-filing" additivity="false">
+    <level value="DEBUG"/>
+    <!-- appender-ref ref="EFFileAppender"/ -->
+    <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="batchManagerLogger" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="BMFileAppender"/>
+  </logger>
+
+  <logger name="imageService" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="uk.gov.ch.chips.server.imaging.Renderer" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="ImageRenderAppender"/>
+  </logger>
+
+  <logger name="cedarMessageService" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="ConsoleAppender"/>
+  </logger>
+
+  <logger name="TuxLogger" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="TuxFileAppender"/>
+  </logger>
+
+  <logger name="TuxedoCedarConnector" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="TuxFileAppender"/>
+  </logger>
+
+  <!-- Root logger -->
+  <root>
+    <priority value="WARN"/>
+    <!-- TODO <appender-ref ref="LogFileAppender"/> -->
+    <appender-ref ref="ConsoleAppender"/>
+  </root>
+
+</log4j:configuration>

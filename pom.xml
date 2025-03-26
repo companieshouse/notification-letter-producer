@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>uk.gov.companieshouse</groupId>
+    <artifactId>notification-letter-producer</artifactId>
+    <packaging>jar</packaging>
+    <version>unversioned</version>
+    <name>Notification Letter/Email Producer</name>
+
+    <parent>
+        <artifactId>companies-house-parent</artifactId>
+        <groupId>uk.gov.companieshouse</groupId>
+        <version>1.2.0</version>
+    </parent>
+
+    <properties>
+        <!-- Java -->
+        <java.version>1.8</java.version>
+
+        <!-- Dependency Versions -->
+        <junit.version>4.12</junit.version>
+        <log4j.version>2.22.1</log4j.version>
+        <wlfullclient.version>12</wlfullclient.version>
+        <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
+        <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>make-build</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <finalName>${project.artifactId}-${project.version}</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>mvn-build</id>
+            <build>
+                <finalName>${project.artifactId}</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>${maven-antrun-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target name="Copy dist files">
+                                        <copy file="config/notification-letter-producer.properties"
+                                              tofile="${project.build.directory}/notification-letter-producer.properties"/>
+                                        <copy todir="${project.build.directory}">
+                                            <fileset dir="scripts"/>
+                                        </copy>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <!-- Compile -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>wlfullclient</artifactId>
+            <version>${wlfullclient.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <fork>true</fork>
+                    <meminitial>128m</meminitial>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <maxmem>512m</maxmem>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>
+                                uk.gov.companieshouse.notificationletterproducer.NotificationLetterProducerRunner
+                            </mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

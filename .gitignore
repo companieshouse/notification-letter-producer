@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Build artifacts
+target
+
+# IntelliJ Files
+.idea
+*.iml
+
+# Eclipse Files
+.classpath
+.project
+.settings
+
+# User created property files
+config/*.properties
+
+# Mac Files
+.DS_Store
