@@ -1,15 +1,9 @@
 Notification Letter Producer (CHIPS)
 ===
 
-The Letter Producer is used to produce the XML files that are read by the Doc 1 producer application.
-Each XML file represents a single letter.
-The Letter Producer extracts a list of letters to produce, and based on the letter type, runs the required SQL statement
-from the database and outputs the data to a letter producer directory.
-The letter producer is a two step process – the first step will produce the XML files in the letter producer directory,
-at which point they can be processed by the DOC1 producer. A stat.txt file will be created in the letter producer output
-directory when the first stage has finished.
-The second stage will be background processing, such as updating transaction status (When required), informing workflow
-a letter has been sent (When required) and deleting the letter from the database.
+The Notification Letter Producer is used to initiate the production of letters and emails which will be sent through the Gov.uk Notify service.
+
+The Notification Letter Producer sends a message to a JMS queue to initiate the sending of the letters and emails.
 
 Guide
 ---
