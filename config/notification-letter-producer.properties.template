@@ -1,0 +1,3 @@
+notificationLetterProducer.provider.url=t3://${provider.host}:${provider.port}
+notificationLetterProducer.security.principal=${principal}
+notificationLetterProducer.security.credentials=${password}
