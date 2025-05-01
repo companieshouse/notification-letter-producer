@@ -19,7 +19,7 @@ import java.util.Properties;
  * A JMS message containing the dispatch date is issued to the NotificationLetterProducerQueue.
  *
  * @author dpatterson
- * @see uk.gov.ch.chips.server.letterproducer.NotificationLetterProducerMDB
+// * @see uk.gov.ch.chips.server.letterproducer.NotificationLetterProducerMDB --TODO check if this needs added to chips server?
  */
 public class NotificationLetterProducer {
 

@@ -1,10 +1,15 @@
 
 #!/bin/bash
 
+######################################################################################
+# TODO --- to be updated with DEEP-299 implement JMS queue consumer?
+
 #cd /src/notification-letter-producer/scripts
 
 ## load variables created from setCron script if needed
 #source /apps/oracle/env.variables
+
+######################################################################################
 
 # load logging functions
 source logging_functions

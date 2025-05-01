@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#TODO- updated when variables are provided
+# is this needed/required??
+
 # sed command to add export to beginning of each line and quote values
 env | sed 's/^/export /;s/=/&"/;s/$/"/' > /apps/oracle/env.variables
 
