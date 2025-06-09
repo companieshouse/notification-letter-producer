@@ -11,9 +11,10 @@
     <name>Notification Letter/Email Producer</name>
 
     <parent>
-        <artifactId>companies-house-parent</artifactId>
         <groupId>uk.gov.companieshouse</groupId>
-        <version>1.2.0</version>
+        <artifactId>companies-house-parent</artifactId>
+        <version>2.1.11</version>
+        <relativePath/>
     </parent>
 
     <properties>
